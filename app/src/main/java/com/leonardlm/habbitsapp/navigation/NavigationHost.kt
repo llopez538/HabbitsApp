@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.leonardlm.habbitsapp.onboarding.presentation.OnboardingScreen
 import kotlin.reflect.KClass
 
 @Composable
@@ -18,7 +19,7 @@ fun NavigationHost(
         startDestination = startDestination
     ) {
         composable<Onboarding> {
-            Text("You are on the onboarding screen")
+            OnboardingScreen()
         }
     }
 }
