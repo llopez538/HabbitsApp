@@ -16,8 +16,11 @@ fun OnboardingScreen() {
         "Title 3"
     )
 
-    Column (modifier = Modifier.fillMaxSize().padding(vertical = 16.dp)){
+    Column (
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(vertical = 16.dp)
+    ) {
         OnBoardingPager(pages = pages, onFinish = {})
-
     }
 }
