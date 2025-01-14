@@ -17,7 +17,6 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -29,15 +28,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.leonardlm.habbitsapp.R
+import com.leonardlm.habbitsapp.onboarding.presentation.models.OnBoardingPagerInformation
+import com.leonardlm.habbitsapp.utils.Helper.Companion.splitTextWithAsteriskIdentification
 import kotlinx.coroutines.launch
 
 @Composable
 fun OnBoardingPager(
-    pages: List<String>,
+    pages: List<OnBoardingPagerInformation>,
     modifier: Modifier = Modifier,
     onFinish: () -> Unit
 ) {
@@ -54,32 +57,13 @@ fun OnBoardingPager(
     ) {
         HorizontalPager(
             state = pagerState,
-        ) { page ->
-            when(page) {
-                0 -> Screen(
-                    title = "WELCOME TO Monumental habits",
-                    subtitle = "Description 1",
-                    image = R.drawable.onboarding1
-                )
-                1 -> Screen(
-                    title = "CREATE NEW HABIT EASILY",
-                    subtitle = "Description 2",
-                    image = R.drawable.onboarding2
-                )
-                2 -> Screen(
-                    title = "KEEP TRACK OF YOUR PROGRESS",
-                    subtitle = "Description 3",
-                    image = R.drawable.onboarding3,
-                    onFinish = onFinish
-                )
-                3 -> Screen(
-                    title = "JOIN A SUPPORTIVE COMMUNITY",
-                    subtitle = "Description 3",
-                    image = R.drawable.onboarding4,
-                    onFinish = onFinish
-                )
-
-            }
+        ) { index ->
+            val pageInfo = pages[index]
+            Screen(
+                title = pageInfo.title,
+                subtitle = pageInfo.subtitle,
+                image = pageInfo.image
+            )
         }
         Row(
             modifier = modifier
@@ -124,8 +108,7 @@ fun OnBoardingPager(
 fun Screen(
     title: String,
     subtitle: String,
-    image: Int,
-    onFinish: (() -> Unit)? = null
+    image: Int
 ) {
     Column(
         modifier = Modifier
@@ -135,7 +118,7 @@ fun Screen(
     ) {
         Spacer(modifier = Modifier.height(32.dp))
         Text(
-            text = title,
+            text = title.uppercase(),
             fontSize = 24.sp
         )
         Spacer(modifier = Modifier.height(32.dp))
@@ -146,11 +129,12 @@ fun Screen(
             contentScale = ContentScale.FillHeight
         )
         Spacer(modifier = Modifier.height(32.dp))
-        Text(
+        /*Text(
             text = subtitle,
             fontSize = 16.sp,
             modifier = Modifier.padding(16.dp)
-        )
+        )*/
+        DecorateParagraph(subtitle.uppercase())
     }
 }
 
