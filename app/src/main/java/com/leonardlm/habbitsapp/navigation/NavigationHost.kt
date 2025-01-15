@@ -19,7 +19,11 @@ fun NavigationHost(
         startDestination = startDestination
     ) {
         composable<Onboarding> {
-            OnboardingScreen()
+            OnboardingScreen(
+                onFinish = {
+                    println("Termino el Onboarding")
+                }
+            )
         }
     }
 }

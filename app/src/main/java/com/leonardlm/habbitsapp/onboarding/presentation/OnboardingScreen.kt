@@ -11,26 +11,28 @@ import com.leonardlm.habbitsapp.onboarding.presentation.components.OnBoardingPag
 import com.leonardlm.habbitsapp.onboarding.presentation.models.OnBoardingPagerInformation
 
 @Composable
-fun OnboardingScreen() {
+fun OnboardingScreen(
+    onFinish: () -> Unit
+) {
     val pages = listOf(
         OnBoardingPagerInformation(
-            title = "WELCOME TO Monumental habits",
-            subtitle = "We can *help you* to be a better version of *yourself.*",
+            title = "WELCOME TO \nMonumental habits",
+            subtitle = "We can *help you* to be a better \nversion of *yourself.*",
             image = R.drawable.onboarding1
         ),
         OnBoardingPagerInformation(
             title = "CREATE NEW HABIT EASILY",
-            subtitle = "Description 2",
+            subtitle = "We can *help you* to be a better \nversion of *yourself.*",
             image = R.drawable.onboarding2
         ),
         OnBoardingPagerInformation(
             title = "KEEP TRACK OF YOUR PROGRESS",
-            subtitle = "Description 3",
+            subtitle = "We can *help you* to be a better \nversion of *yourself.*",
             image = R.drawable.onboarding3
         ),
         OnBoardingPagerInformation(
             title = "JOIN A SUPPORTIVE COMMUNITY",
-            subtitle = "Description 3",
+            subtitle = "We can *help you* to be a better \nversion of *yourself.*",
             image = R.drawable.onboarding4
         )
     )
@@ -40,6 +42,9 @@ fun OnboardingScreen() {
             .fillMaxSize()
             .padding(vertical = 16.dp)
     ) {
-        OnBoardingPager(pages = pages, onFinish = {})
+        OnBoardingPager(
+            pages = pages,
+            onFinish = onFinish
+        )
     }
 }
