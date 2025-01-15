@@ -8,7 +8,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.leonardlm.habbitsapp.R
 import com.leonardlm.habbitsapp.onboarding.presentation.components.OnBoardingPager
-import com.leonardlm.habbitsapp.onboarding.presentation.components.Screen
 import com.leonardlm.habbitsapp.onboarding.presentation.models.OnBoardingPagerInformation
 
 @Composable
