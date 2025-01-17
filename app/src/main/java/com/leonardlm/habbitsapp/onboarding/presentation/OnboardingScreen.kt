@@ -4,16 +4,28 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.leonardlm.habbitsapp.R
 import com.leonardlm.habbitsapp.onboarding.presentation.components.OnBoardingPager
 import com.leonardlm.habbitsapp.onboarding.presentation.models.OnBoardingPagerInformation
+import com.leonardlm.habbitsapp.onboarding.presentation.viewmodel.OnBoardingViewModel
 
 @Composable
 fun OnboardingScreen(
+    viewModel: OnBoardingViewModel,
     onFinish: () -> Unit
 ) {
+    val hasSeenOnBoarding = viewModel.hasSeenOnBoarding.collectAsState(
+        initial = true
+    )
+    LaunchedEffect(viewModel.hasSeenOnBoarding) {
+        if (hasSeenOnBoarding.value == true) {
+            onFinish()
+        }
+    }
     val pages = listOf(
         OnBoardingPagerInformation(
             title = "WELCOME TO \nMonumental habits",

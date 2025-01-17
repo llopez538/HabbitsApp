@@ -1,5 +1,6 @@
 package com.leonardlm.habbitsapp.navigation
 
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -21,8 +22,12 @@ fun NavigationHost(
             OnboardingScreen(
                 onFinish = {
                     println("Termino el Onboarding")
-                }
+                },
+                viewModel = TODO()
             )
+        }
+        composable<Login> {
+            Text("Login")
         }
     }
 }
