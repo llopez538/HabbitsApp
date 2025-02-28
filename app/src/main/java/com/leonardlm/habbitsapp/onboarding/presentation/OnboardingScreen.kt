@@ -6,21 +6,25 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.leonardlm.habbitsapp.R
 import com.leonardlm.habbitsapp.onboarding.presentation.components.OnBoardingPager
 import com.leonardlm.habbitsapp.onboarding.presentation.models.OnBoardingPagerInformation
 import com.leonardlm.habbitsapp.onboarding.presentation.viewmodel.OnBoardingViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun OnboardingScreen(
-    viewModel: OnBoardingViewModel,
+    viewModel: OnBoardingViewModel = hiltViewModel(),
     onFinish: () -> Unit
 ) {
     val hasSeenOnBoarding = viewModel.hasSeenOnBoarding.collectAsState(
         initial = true
     )
+    val scope = rememberCoroutineScope()
     LaunchedEffect(viewModel.hasSeenOnBoarding) {
         if (hasSeenOnBoarding.value == true) {
             onFinish()
@@ -56,7 +60,12 @@ fun OnboardingScreen(
     ) {
         OnBoardingPager(
             pages = pages,
-            onFinish = onFinish
+            onFinish = {
+                scope.launch {
+                    viewModel.completeOnBoarding()
+                }
+                onFinish()
+            }
         )
     }
 }

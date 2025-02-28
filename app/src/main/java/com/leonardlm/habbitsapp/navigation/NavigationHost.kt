@@ -21,9 +21,9 @@ fun NavigationHost(
         composable<Onboarding> {
             OnboardingScreen(
                 onFinish = {
-                    println("Termino el Onboarding")
-                },
-                viewModel = TODO()
+                    navHostController.popBackStack()
+                    navHostController.navigate(Login)
+                }
             )
         }
         composable<Login> {
