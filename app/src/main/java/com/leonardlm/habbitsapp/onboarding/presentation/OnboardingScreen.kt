@@ -63,8 +63,8 @@ fun OnboardingScreen(
             onFinish = {
                 scope.launch {
                     viewModel.completeOnBoarding()
+                    onFinish()
                 }
-                onFinish()
             }
         )
     }

@@ -9,11 +9,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
+import com.leonardlm.habbitsapp.navigation.Login
 import com.leonardlm.habbitsapp.navigation.NavigationHost
 import com.leonardlm.habbitsapp.navigation.Onboarding
 import com.leonardlm.habbitsapp.ui.theme.HabbitsAppTheme
@@ -29,8 +28,13 @@ class MainActivity : ComponentActivity() {
             HabbitsAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     val navController = rememberNavController()
+                    val hasSeen = viewModel.hasSeenOnBoarding.collectAsState(initial = true)
 
-                    NavigationHost(navController, Onboarding)
+
+                    NavigationHost(
+                        navHostController = navController,
+                        startDestination = getStartDestination(hasSeen.value)
+                    )
 
                     Box(
                         modifier = Modifier.padding(innerPadding)
@@ -40,11 +44,11 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    /*private fun getStartDestination(): Onboarding {
-        return if (viewModel.hasSeenOnBoarding) {
-            Onboarding
-        } else {
-            Onboarding
+    private fun getStartDestination(hasSeenOnBoarding: Boolean?): Any {
+        return when (hasSeenOnBoarding) {
+            true -> Login
+            false -> Onboarding
+            else -> Onboarding
         }
-    }*/
+    }
 }
