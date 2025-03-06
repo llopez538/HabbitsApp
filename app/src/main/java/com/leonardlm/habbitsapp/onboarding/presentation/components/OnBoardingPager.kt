@@ -17,7 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.leonardlm.habbitsapp.core.presentation.components.HabitButton
+import com.leonardlm.habbitsapp.core.presentation.components.atoms.HabitButton
 import com.leonardlm.habbitsapp.onboarding.presentation.models.OnBoardingPagerInformation
 import kotlinx.coroutines.launch
 

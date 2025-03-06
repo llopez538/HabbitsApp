@@ -1,4 +1,4 @@
-package com.leonardlm.habbitsapp.core.presentation.components
+package com.leonardlm.habbitsapp.core.presentation.components.atoms
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
