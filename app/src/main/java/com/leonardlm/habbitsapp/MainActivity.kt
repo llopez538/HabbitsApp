@@ -30,15 +30,14 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
                     val hasSeen = viewModel.hasSeenOnBoarding.collectAsState(initial = true)
 
-
-                    NavigationHost(
-                        navHostController = navController,
-                        startDestination = getStartDestination(hasSeen.value)
-                    )
-
                     Box(
                         modifier = Modifier.padding(innerPadding)
-                    )
+                    ){
+                        NavigationHost(
+                            navHostController = navController,
+                            startDestination = getStartDestination(hasSeen.value)
+                        )
+                    }
                 }
             }
         }

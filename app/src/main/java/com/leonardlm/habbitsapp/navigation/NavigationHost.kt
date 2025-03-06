@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.leonardlm.habbitsapp.authentication.login.LoginScreen
 import com.leonardlm.habbitsapp.onboarding.presentation.OnboardingScreen
 import kotlin.reflect.KClass
 
@@ -27,7 +28,7 @@ fun NavigationHost(
             )
         }
         composable<Login> {
-            Text("Login")
+            LoginScreen()
         }
     }
 }
