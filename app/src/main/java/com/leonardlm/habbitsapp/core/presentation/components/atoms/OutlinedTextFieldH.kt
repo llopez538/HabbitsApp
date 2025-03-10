@@ -1,11 +1,14 @@
 package com.leonardlm.habbitsapp.core.presentation.components.atoms
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,12 +18,16 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.dp
 import java.lang.Error
 
 @Composable
 fun OutlinedTextFieldH(
     value: String,
     onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
     isError: Boolean = false,
     label: @Composable() (() -> Unit)?,
     placeholder: String,
@@ -30,7 +37,6 @@ fun OutlinedTextFieldH(
     keyboardType: KeyboardType = KeyboardType.Text,
     keyboardOptions: KeyboardOptions = KeyboardOptions(),
     keyboardActions: KeyboardActions = KeyboardActions(),
-    modifier: Modifier = Modifier,
     passwordVisibility: Boolean = false,
     passwordVisibilityOnClick: (Boolean) -> Unit = {},
     startIcon: ImageVector? = null,
@@ -75,19 +81,27 @@ fun OutlinedTextFieldH(
         OutlinedTextField(
             value = value,
             onValueChange = onValueChange,
-            modifier = Modifier
+            label = label,
+            modifier = modifier
                 .fillMaxWidth()
                 .semantics { this.contentDescription = contentDescription },
-            label = label,
             placeholder = { Text(text = placeholder) },
-            isError = errorMessage.isNotEmpty(),
+            isError = isError,
             singleLine = true,
             enabled = isEnable,
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,
             leadingIcon = leadingIcon,
             trailingIcon = trailingIcon,
+            visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
         )
+        if (errorMessage != null) {
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = errorMessage,
+                color = MaterialTheme.colorScheme.error
+            )
+        }
     }
 }
 
