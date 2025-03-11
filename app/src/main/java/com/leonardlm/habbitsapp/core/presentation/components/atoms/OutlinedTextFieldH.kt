@@ -4,14 +4,21 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -21,7 +28,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import java.lang.Error
 
 @Composable
 fun OutlinedTextFieldH(
@@ -29,19 +35,20 @@ fun OutlinedTextFieldH(
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     isError: Boolean = false,
-    label: @Composable() (() -> Unit)?,
-    placeholder: String,
-    contentDescription: String,
-    errorMessage: String,
+    label: @Composable() (() -> Unit)? = null,
+    placeholder: String = "",
+    contentDescription: String = "",
+    errorMessage: String? = "",
     isEnable: Boolean = true,
-    keyboardType: KeyboardType = KeyboardType.Text,
+    isPassword: Boolean = false,
     keyboardOptions: KeyboardOptions = KeyboardOptions(),
     keyboardActions: KeyboardActions = KeyboardActions(),
     passwordVisibility: Boolean = false,
     passwordVisibilityOnClick: (Boolean) -> Unit = {},
+    backgroundColor: Color = MaterialTheme.colorScheme.background,
     startIcon: ImageVector? = null,
     endIcon: ImageVector? = null,
-    leadingIcon: @Composable() (() -> Unit)? = if (startIcon != null)  {
+    leadingIcon: @Composable() (() -> Unit)? = if (startIcon != null) {
         {
             Icon(
                 imageVector = startIcon,
@@ -49,9 +56,9 @@ fun OutlinedTextFieldH(
             )
         }
     } else null,
-    trailingIcon: @Composable() (() -> Unit)? = if (endIcon != null || keyboardType.toString() == KeyboardType.Password.toString()) {
+    trailingIcon: @Composable() (() -> Unit)? = if (endIcon != null || isPassword) {
         {
-            if (keyboardType.toString() == KeyboardType.Password.toString()) {
+            if (isPassword) {
 
                 val msg =
                     if (passwordVisibility) "Hide" else "Show"
@@ -77,12 +84,12 @@ fun OutlinedTextFieldH(
         }
     } else null,
 ) {
-    Column {
+    Column(modifier = modifier) {
         OutlinedTextField(
             value = value,
             onValueChange = onValueChange,
             label = label,
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .semantics { this.contentDescription = contentDescription },
             placeholder = { Text(text = placeholder) },
@@ -94,6 +101,19 @@ fun OutlinedTextFieldH(
             leadingIcon = leadingIcon,
             trailingIcon = trailingIcon,
             visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
+            shape = RoundedCornerShape(12.dp),
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedTextColor = MaterialTheme.colorScheme.primary,
+                unfocusedTextColor = MaterialTheme.colorScheme.primary,
+                focusedContainerColor = backgroundColor,
+                unfocusedContainerColor = backgroundColor,
+                focusedBorderColor = Color.Transparent,
+                unfocusedBorderColor = Color.Transparent,
+                focusedLeadingIconColor = MaterialTheme.colorScheme.primary,
+                focusedPlaceholderColor = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.5f),
+                unfocusedPlaceholderColor = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.5f),
+                unfocusedLeadingIconColor = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.5f)
+            )
         )
         if (errorMessage != null) {
             Spacer(modifier = Modifier.height(8.dp))
@@ -105,3 +125,42 @@ fun OutlinedTextFieldH(
     }
 }
 
+
+@Composable
+fun HabitPasswordTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    isError: Boolean = false,
+    label: @Composable() (() -> Unit)? = null,
+    placeholder: String = "Password",
+    contentDescription: String,
+    errorMessage: String? = null,
+    isEnable: Boolean = true,
+    keyboardOptions: KeyboardOptions = KeyboardOptions(),
+    keyboardActions: KeyboardActions = KeyboardActions(),
+    backgroundColor: Color = MaterialTheme.colorScheme.background
+) {
+    var passwordVisibility by rememberSaveable { mutableStateOf(false) }
+
+    OutlinedTextFieldH(
+        value = value,
+        onValueChange = onValueChange,
+        modifier = modifier,
+        isError = isError,
+        label = label,
+        placeholder = placeholder,
+        contentDescription = contentDescription,
+        errorMessage = errorMessage,
+        isPassword = true,
+        isEnable = isEnable,
+        passwordVisibility = passwordVisibility,
+        passwordVisibilityOnClick = {
+            passwordVisibility =  !passwordVisibility
+        },
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
+        backgroundColor = backgroundColor
+    )
+
+}

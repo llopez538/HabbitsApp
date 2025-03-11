@@ -14,6 +14,4 @@ class MainViewModel @Inject constructor(
 ): ViewModel() {
     var hasSeenOnBoarding by mutableStateOf(hasSeenOnBoardingUseCase())
     private set
-
-//    esto es una pue
 }
