@@ -4,19 +4,22 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush.Companion.verticalGradient
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import com.leonardlm.habbitsapp.R
 import com.leonardlm.habbitsapp.authentication.login.components.LoginForm
@@ -66,7 +69,9 @@ fun LoginScreen() {
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-                HabitTitle("Welcome to \nMonumental habits")
+                Spacer(Modifier.weight(2f))
+                HabitTitle("Welcome to \nMonumental habits",)
+                Spacer(Modifier.weight(1f))
                 LoginForm()
             }
         }

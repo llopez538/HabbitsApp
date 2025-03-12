@@ -10,16 +10,22 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.leonardlm.habbitsapp.core.presentation.components.atoms.HabitButton
@@ -35,14 +41,12 @@ fun LoginForm(
         modifier = Modifier
             .fillMaxWidth()
             .background(
-                color = MaterialTheme.colorScheme.background,
+                color = Color.White,
                 shape = RoundedCornerShape(20.dp)
             )
             .padding(
                 top = 12.dp,
                 bottom = 22.dp,
-                start = 0.dp,
-                end = 0.dp
             )
     ) {
         Text(
@@ -63,6 +67,7 @@ fun LoginForm(
             contentDescription = "Enter email",
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(bottom = 8.dp)
                 .padding(horizontal = 20.dp),
             startIcon = Icons.Outlined.Email,
             keyboardOptions = KeyboardOptions(
@@ -86,7 +91,6 @@ fun LoginForm(
             contentDescription = "Enter password",
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 6.dp)
                 .padding(horizontal = 20.dp),
             errorMessage = null,
             isEnable = true,
@@ -106,10 +110,37 @@ fun LoginForm(
             text = "Login",
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 20.dp),
+                .padding(20.dp),
             isEnabled = true
         ) {
+            /* TODO */
+        }
+        TextButton(
+            onClick = { /*TODO*/ }
+        ) {
+            Text(
+                text = "Forgot Password?",
+                color = MaterialTheme.colorScheme.tertiary,
+                textDecoration = TextDecoration.Underline
+            )
+        }
 
+        TextButton(
+            onClick = { /*TODO*/ }
+        ) {
+            Text(
+                text = buildAnnotatedString {
+                    append("Don't have an account? ")
+                    withStyle(
+                        style = SpanStyle(
+                            fontWeight = FontWeight.Bold
+                        )
+                    ) {
+                        append("Sign up")
+                    }
+                },
+                color = MaterialTheme.colorScheme.tertiary,
+            )
         }
     }
 }
