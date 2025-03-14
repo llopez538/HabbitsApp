@@ -43,7 +43,7 @@ fun OutlinedTextFieldH(
     isPassword: Boolean = false,
     keyboardOptions: KeyboardOptions = KeyboardOptions(),
     keyboardActions: KeyboardActions = KeyboardActions(),
-    passwordVisibility: Boolean = false,
+    hidePassword: Boolean = false,
     passwordVisibilityOnClick: (Boolean) -> Unit = {},
     backgroundColor: Color = MaterialTheme.colorScheme.background,
     startIcon: ImageVector? = null,
@@ -61,9 +61,9 @@ fun OutlinedTextFieldH(
             if (isPassword) {
 
                 val msg =
-                    if (passwordVisibility) "Hide" else "Show"
+                    if (hidePassword) "Show" else "Hide"
 
-                TextButton(onClick = { passwordVisibilityOnClick(passwordVisibility) }
+                TextButton(onClick = { passwordVisibilityOnClick(hidePassword) }
                 ) {
                     Text(
                         text = msg,
@@ -96,7 +96,7 @@ fun OutlinedTextFieldH(
             keyboardActions = keyboardActions,
             leadingIcon = leadingIcon,
             trailingIcon = trailingIcon,
-            visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
+            visualTransformation = if (isPassword && hidePassword) PasswordVisualTransformation() else VisualTransformation.None,
             shape = RoundedCornerShape(12.dp),
             colors = OutlinedTextFieldDefaults.colors(
                 focusedTextColor = MaterialTheme.colorScheme.primary,
@@ -137,7 +137,7 @@ fun HabitPasswordTextField(
     keyboardActions: KeyboardActions = KeyboardActions(),
     backgroundColor: Color = MaterialTheme.colorScheme.background
 ) {
-    var passwordVisibility by rememberSaveable { mutableStateOf(false) }
+    var passwordVisibility by rememberSaveable { mutableStateOf(true) }
 
     OutlinedTextFieldH(
         value = value,
@@ -150,7 +150,7 @@ fun HabitPasswordTextField(
         errorMessage = errorMessage,
         isPassword = true,
         isEnable = isEnable,
-        passwordVisibility = passwordVisibility,
+        hidePassword = passwordVisibility,
         passwordVisibilityOnClick = {
             passwordVisibility =  !passwordVisibility
         },
