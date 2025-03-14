@@ -1,4 +1,4 @@
-package com.leonardlm.habbitsapp.authentication.login
+package com.leonardlm.habbitsapp.authentication.presentation.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -23,7 +23,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.leonardlm.habbitsapp.R
-import com.leonardlm.habbitsapp.authentication.login.components.LoginForm
+import com.leonardlm.habbitsapp.authentication.presentation.login.components.LoginForm
 import com.leonardlm.habbitsapp.core.presentation.components.atoms.HabitTitle
 
 @Composable
