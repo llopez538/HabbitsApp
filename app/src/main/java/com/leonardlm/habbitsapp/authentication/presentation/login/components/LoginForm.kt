@@ -1,4 +1,4 @@
-package com.leonardlm.habbitsapp.authentication.login.components
+package com.leonardlm.habbitsapp.authentication.presentation.login.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
