@@ -18,7 +18,9 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -28,17 +30,22 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.leonardlm.habbitsapp.authentication.login.LoginEvent
+import com.leonardlm.habbitsapp.authentication.login.LoginState
 import com.leonardlm.habbitsapp.core.presentation.components.atoms.HabitButton
 import com.leonardlm.habbitsapp.core.presentation.components.atoms.HabitPasswordTextField
 import com.leonardlm.habbitsapp.core.presentation.components.atoms.OutlinedTextFieldH
 
 @Composable
 fun LoginForm(
+    state: LoginState,
+    onEvent: (LoginEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val focusManager = LocalFocusManager.current
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .background(
                 color = Color.White,
@@ -58,11 +65,12 @@ fun LoginForm(
         Spacer(Modifier.height(16. dp))
         HorizontalDivider(
             color = MaterialTheme.colorScheme.background,
-            thickness = 1.dp
+            thickness = 1.dp,
+            modifier = Modifier.padding(bottom = 16.dp)
         )
         OutlinedTextFieldH(
-            value = "",
-            onValueChange = {},
+            value = state.email,
+            onValueChange = { onEvent(LoginEvent.EmailChange(it)) },
             placeholder = "Email",
             contentDescription = "Enter email",
             modifier = Modifier
@@ -77,23 +85,23 @@ fun LoginForm(
             ),
             keyboardActions = KeyboardActions(
                 onAny = {
-                    //
+                    focusManager.moveFocus(FocusDirection.Next)
                 }
             ),
-            errorMessage = null,
-            isEnable = true
+            errorMessage = state.emailError,
+            isEnable = !state.isLoading
         )
 
         HabitPasswordTextField(
-            value = "",
-            onValueChange = {},
+            value = state.password,
+            onValueChange = { onEvent(LoginEvent.PasswordChange(it)) },
             placeholder = "Password",
             contentDescription = "Enter password",
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp),
-            errorMessage = null,
-            isEnable = true,
+            errorMessage = state.passwordError,
+            isEnable = !state.isLoading,
             keyboardOptions = KeyboardOptions(
                 autoCorrectEnabled = false,
                 keyboardType = KeyboardType.Password,
@@ -101,7 +109,8 @@ fun LoginForm(
             ),
             keyboardActions = KeyboardActions(
                 onAny = {
-                    //
+                    focusManager.clearFocus()
+                    onEvent(LoginEvent.Login)
                 }
             )
         )
@@ -111,9 +120,9 @@ fun LoginForm(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp),
-            isEnabled = true
+            isEnabled = !state.isLoading
         ) {
-            /* TODO */
+            onEvent(LoginEvent.Login)
         }
         TextButton(
             onClick = { /*TODO*/ }
@@ -126,7 +135,7 @@ fun LoginForm(
         }
 
         TextButton(
-            onClick = { /*TODO*/ }
+            onClick = { onEvent(LoginEvent.SignUp) }
         ) {
             Text(
                 text = buildAnnotatedString {
@@ -148,5 +157,5 @@ fun LoginForm(
 @Preview
 @Composable
 fun LoginFormPreview() {
-    LoginForm()
+    //LoginForm()
 }

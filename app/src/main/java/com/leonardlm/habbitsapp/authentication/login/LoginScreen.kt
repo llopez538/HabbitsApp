@@ -21,12 +21,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.leonardlm.habbitsapp.R
 import com.leonardlm.habbitsapp.authentication.login.components.LoginForm
 import com.leonardlm.habbitsapp.core.presentation.components.atoms.HabitTitle
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(loginViewModel: LoginViewModel = hiltViewModel()) {
+    val state = loginViewModel.state
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -69,10 +71,13 @@ fun LoginScreen() {
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-                Spacer(Modifier.weight(2f))
+                Spacer(Modifier.weight(1f))
                 HabitTitle("Welcome to \nMonumental habits",)
                 Spacer(Modifier.weight(1f))
-                LoginForm()
+                LoginForm(
+                    state = state,
+                    onEvent = loginViewModel::onEvent
+                )
             }
         }
 
