@@ -88,6 +88,7 @@ fun LoginForm(
                     focusManager.moveFocus(FocusDirection.Next)
                 }
             ),
+            isError = state.emailError != null,
             errorMessage = state.emailError,
             isEnable = !state.isLoading
         )
@@ -100,6 +101,7 @@ fun LoginForm(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp),
+            isError = state.passwordError != null,
             errorMessage = state.passwordError,
             isEnable = !state.isLoading,
             keyboardOptions = KeyboardOptions(
