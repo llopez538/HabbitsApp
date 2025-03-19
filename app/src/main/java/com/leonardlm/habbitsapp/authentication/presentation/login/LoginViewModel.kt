@@ -7,9 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.leonardlm.habbitsapp.authentication.domain.model.LoginUseCases
 import com.leonardlm.habbitsapp.authentication.domain.model.PasswordResult
-import com.leonardlm.habbitsapp.authentication.domain.usecase.LoginWithEmailUseCase
-import com.leonardlm.habbitsapp.authentication.login.LoginEvent
-import com.leonardlm.habbitsapp.authentication.login.LoginState
+import com.leonardlm.habbitsapp.authentication.presentation.model.LoginState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -41,8 +39,6 @@ class LoginViewModel @Inject constructor(
                     sigUp = true
                 )
             }
-
-            else -> {}
         }
     }
 
@@ -76,7 +72,7 @@ class LoginViewModel @Inject constructor(
                     )
                 }.onFailure {
                     state = state.copy(
-                        emailError = it.message,
+                        serverError = it.message,
                     )
                 }
 
@@ -84,6 +80,9 @@ class LoginViewModel @Inject constructor(
                     isLoading = false
                 )
             }
+            state = state.copy(
+                serverError = null
+            )
         }
     }
 }

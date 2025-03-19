@@ -1,13 +1,13 @@
 package com.leonardlm.habbitsapp.navigation
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.leonardlm.habbitsapp.authentication.presentation.login.LoginScreen
+import com.leonardlm.habbitsapp.authentication.presentation.signup.SignupScreen
+import com.leonardlm.habbitsapp.home.presentation.HomeScreen
 import com.leonardlm.habbitsapp.onboarding.presentation.OnboardingScreen
-import kotlin.reflect.KClass
 
 @Composable
 fun NavigationHost(
@@ -28,7 +28,22 @@ fun NavigationHost(
             )
         }
         composable<Login> {
-            LoginScreen()
+            LoginScreen(
+                onLogin = {
+                    navHostController.popBackStack()
+                    navHostController.navigate(Home)
+                },
+                onSignUp = {
+                    navHostController.navigate(SignUp)
+                }
+            )
         }
+        composable<SignUp> {
+            SignupScreen()
+        }
+        composable<Home> {
+            HomeScreen()
+        }
+
     }
 }

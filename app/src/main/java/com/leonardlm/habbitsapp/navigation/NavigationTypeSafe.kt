@@ -7,3 +7,9 @@ object Onboarding
 
 @Serializable
 object Login
+
+@Serializable
+object Home
+
+@Serializable
+object SignUp

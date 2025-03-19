@@ -30,8 +30,8 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.leonardlm.habbitsapp.authentication.login.LoginEvent
-import com.leonardlm.habbitsapp.authentication.login.LoginState
+import com.leonardlm.habbitsapp.authentication.presentation.login.LoginEvent
+import com.leonardlm.habbitsapp.authentication.presentation.model.LoginState
 import com.leonardlm.habbitsapp.core.presentation.components.atoms.HabitButton
 import com.leonardlm.habbitsapp.core.presentation.components.atoms.HabitPasswordTextField
 import com.leonardlm.habbitsapp.core.presentation.components.atoms.OutlinedTextFieldH
@@ -122,7 +122,8 @@ fun LoginForm(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp),
-            isEnabled = !state.isLoading
+            isEnabled = !state.isLoading,
+            isLoading = state.isLoading
         ) {
             onEvent(LoginEvent.Login)
         }
