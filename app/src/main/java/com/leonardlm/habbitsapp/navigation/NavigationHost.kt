@@ -39,7 +39,15 @@ fun NavigationHost(
             )
         }
         composable<SignUp> {
-            SignupScreen()
+            SignupScreen(
+                onSignUp = {
+                    navHostController.popBackStack()
+                    navHostController.navigate(Login)
+                },
+                onSignIn = {
+                    navHostController.navigate(Login)
+                }
+            )
         }
         composable<Home> {
             HomeScreen()

@@ -4,8 +4,10 @@ import com.leonardlm.habbitsapp.authentication.data.matcher.EmailMatcherImpl
 import com.leonardlm.habbitsapp.authentication.data.repository.AuthenticationRepositoryImpl
 import com.leonardlm.habbitsapp.authentication.domain.matcher.EmailMatcher
 import com.leonardlm.habbitsapp.authentication.domain.model.LoginUseCases
+import com.leonardlm.habbitsapp.authentication.domain.model.SignupUseCases
 import com.leonardlm.habbitsapp.authentication.domain.repository.AuthenticationRepository
 import com.leonardlm.habbitsapp.authentication.domain.usecase.LoginWithEmailUseCase
+import com.leonardlm.habbitsapp.authentication.domain.usecase.SignupWithEmailUseCase
 import com.leonardlm.habbitsapp.authentication.domain.usecase.ValidateEmailUseCase
 import com.leonardlm.habbitsapp.authentication.domain.usecase.ValidatePasswordUseCase
 import dagger.Module
@@ -38,6 +40,19 @@ object AuthenticationModule {
         ) : LoginUseCases  {
         return LoginUseCases(
             loginWithEmailUseCase = LoginWithEmailUseCase(loginRepository),
+            validateEmailUseCase = ValidateEmailUseCase(emailMatcher),
+            validatePasswordUseCase = ValidatePasswordUseCase()
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideSignupUseCase(
+        signupRepository: AuthenticationRepository,
+        emailMatcher: EmailMatcher
+    ) : SignupUseCases {
+        return SignupUseCases(
+            signupWithEmailUseCase = SignupWithEmailUseCase(signupRepository),
             validateEmailUseCase = ValidateEmailUseCase(emailMatcher),
             validatePasswordUseCase = ValidatePasswordUseCase()
         )

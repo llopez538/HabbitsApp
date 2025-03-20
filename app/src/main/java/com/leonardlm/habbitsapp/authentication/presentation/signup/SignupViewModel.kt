@@ -4,12 +4,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.leonardlm.habbitsapp.authentication.domain.model.SignupUseCases
 import com.leonardlm.habbitsapp.authentication.presentation.model.SignupState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SignupViewModel @Inject constructor(): ViewModel() {
+class SignupViewModel @Inject constructor(
+    private val signupUseCases: SignupUseCases
+): ViewModel() {
     var state by mutableStateOf(SignupState())
     private set
 
@@ -37,6 +42,8 @@ class SignupViewModel @Inject constructor(): ViewModel() {
     }
 
     private fun signUp() {
-
+        viewModelScope.launch {
+            signupUseCases.signupWithEmailUseCase(state.email, state.password)
+        }
     }
 }
