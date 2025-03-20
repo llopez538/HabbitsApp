@@ -34,11 +34,6 @@ class LoginViewModel @Inject constructor(
             is LoginEvent.Login -> {
                 login()
             }
-            is LoginEvent.SignUp -> {
-                state = state.copy(
-                    sigUp = true
-                )
-            }
         }
     }
 

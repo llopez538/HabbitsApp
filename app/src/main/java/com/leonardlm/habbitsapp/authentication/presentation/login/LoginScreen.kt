@@ -46,12 +46,6 @@ fun LoginScreen(
         }
     }
 
-    LaunchedEffect(state.sigUp) {
-        if (state.sigUp) {
-            onSignUp()
-        }
-    }
-
     LaunchedEffect(key1 = state.serverError) {
         if (state.serverError != null) {
             snackBarHostState.showSnackbar(state.serverError)
@@ -109,7 +103,8 @@ fun LoginScreen(
                     Spacer(Modifier.weight(1f))
                     LoginForm(
                         state = state,
-                        onEvent = loginViewModel::onEvent
+                        onEvent = loginViewModel::onEvent,
+                        onSignUp = onSignUp
                     )
                 }
             }
@@ -119,6 +114,7 @@ fun LoginScreen(
         if (state.serverError != null) {
             SnackbarHost(snackBarHostState) {
                 Snackbar(
+                    containerColor = MaterialTheme.colorScheme.error,
                     modifier = Modifier.padding(16.dp),
                 ) {
                     Text(text = state.serverError)

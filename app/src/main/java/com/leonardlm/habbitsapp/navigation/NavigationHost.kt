@@ -34,6 +34,7 @@ fun NavigationHost(
                     navHostController.navigate(Home)
                 },
                 onSignUp = {
+                    navHostController.popBackStack()
                     navHostController.navigate(SignUp)
                 }
             )
@@ -45,6 +46,7 @@ fun NavigationHost(
                     navHostController.navigate(Login)
                 },
                 onSignIn = {
+                    navHostController.popBackStack()
                     navHostController.navigate(Login)
                 }
             )

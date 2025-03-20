@@ -91,6 +91,8 @@ fun SignupForm(
         )
         HabitButton(
             text = "Create Account",
+            isEnabled = !state.isLoading,
+            isLoading = state.isLoading,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp)

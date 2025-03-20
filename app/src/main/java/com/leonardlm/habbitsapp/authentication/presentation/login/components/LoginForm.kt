@@ -40,6 +40,7 @@ import com.leonardlm.habbitsapp.core.presentation.components.atoms.OutlinedTextF
 fun LoginForm(
     state: LoginState,
     onEvent: (LoginEvent) -> Unit,
+    onSignUp: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val focusManager = LocalFocusManager.current
@@ -138,7 +139,7 @@ fun LoginForm(
         }
 
         TextButton(
-            onClick = { onEvent(LoginEvent.SignUp) }
+            onClick = { onSignUp }
         ) {
             Text(
                 text = buildAnnotatedString {

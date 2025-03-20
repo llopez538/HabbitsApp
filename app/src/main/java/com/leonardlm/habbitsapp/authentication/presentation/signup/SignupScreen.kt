@@ -5,12 +5,22 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarDefaults
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.leonardlm.habbitsapp.R
 import com.leonardlm.habbitsapp.authentication.presentation.model.SignupState
@@ -24,8 +34,39 @@ fun SignupScreen(
     onSignIn: () -> Unit
 ) {
     val state = signupViewModel.state
+    var snackBarHostState = remember { SnackbarHostState() }
 
-    Scaffold { innerPadding ->
+    LaunchedEffect(key1 = state.signIn) {
+        if (state.signIn) {
+            onSignIn()
+        }
+    }
+
+    LaunchedEffect(key1 = state.serverError) {
+        if (state.serverError != null) {
+            snackBarHostState.showSnackbar(state.serverError)
+        }
+    }
+
+    LaunchedEffect(key1 = state.success) {
+        if (state.success != null) {
+            snackBarHostState.showSnackbar(state.success)
+        }
+    }
+
+    Scaffold(
+        snackbarHost = {
+            if (state.serverError != null || state.success != null) {
+                SnackbarHost(hostState = snackBarHostState) {
+                    Snackbar(
+                        containerColor = containerColor(state),
+                        modifier = Modifier.padding(16.dp),
+                        snackbarData = it,
+                    )
+                }
+            }
+        }
+    ) { innerPadding ->
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceAround,
@@ -45,6 +86,18 @@ fun SignupScreen(
         }
 
     }
+}
+
+@Composable
+fun containerColor(state: SignupState): Color {
+    var color: Color = SnackbarDefaults.color
+    if (state.serverError != null) {
+        color = MaterialTheme.colorScheme.error
+    }
+    if (state.success != null) {
+        color = MaterialTheme.colorScheme.primary
+    }
+    return color
 }
 
 @Preview
