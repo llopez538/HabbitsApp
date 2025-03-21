@@ -11,7 +11,6 @@ import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarDefaults
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -30,14 +29,20 @@ import com.leonardlm.habbitsapp.core.presentation.components.atoms.HabitTitle
 @Composable
 fun SignupScreen(
     signupViewModel: SignupViewModel = hiltViewModel(),
-    onSignUp: () -> Unit,
-    onSignIn: () -> Unit
+    onSignIn: () -> Unit,
+    onLogIn: () -> Unit
 ) {
     val state = signupViewModel.state
-    var snackBarHostState = remember { SnackbarHostState() }
+    val snackBarHostState = remember { SnackbarHostState() }
 
-    LaunchedEffect(key1 = state.signIn) {
-        if (state.signIn) {
+    LaunchedEffect(key1 = state.logIn) {
+        if (state.logIn) {
+            onLogIn()
+        }
+    }
+
+    LaunchedEffect(key1 = state.isSignedIn) {
+        if (state.isSignedIn) {
             onSignIn()
         }
     }
@@ -104,7 +109,7 @@ fun containerColor(state: SignupState): Color {
 @Composable
 fun SignupScreenPreview() {
     SignupScreen(
-        onSignUp = {},
+        onLogIn = {},
         onSignIn = {}
     )
 }

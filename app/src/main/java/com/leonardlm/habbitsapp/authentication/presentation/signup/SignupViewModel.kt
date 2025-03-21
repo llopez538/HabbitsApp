@@ -31,9 +31,9 @@ class SignupViewModel @Inject constructor(
                     password = event.password
                 )
             }
-            is SignupEvent.SignIn -> {
+            is SignupEvent.LogIn -> {
                 state = state.copy(
-                    signIn = true
+                    logIn = true
                 )
             }
             is SignupEvent.SignUp -> {
@@ -67,6 +67,7 @@ class SignupViewModel @Inject constructor(
             viewModelScope.launch {
                 signupUseCases.signupWithEmailUseCase(state.email, state.password).onSuccess {
                     state = state.copy(
+                        isSignedIn = true,
                         success = "User created successfully"
                     )
                 }.onFailure { error ->
@@ -80,7 +81,9 @@ class SignupViewModel @Inject constructor(
             }
             state = state.copy(
                 serverError = null,
-                success = null
+                success = null,
+                email = "",
+                password = ""
             )
 
         }

@@ -100,7 +100,7 @@ fun SignupForm(
             onEvent(SignupEvent.SignUp)
         }
         TextButton(
-            onClick = { onEvent(SignupEvent.SignIn) }
+            onClick = { onEvent(SignupEvent.LogIn) }
         ) {
             Text(
                 text = buildAnnotatedString {

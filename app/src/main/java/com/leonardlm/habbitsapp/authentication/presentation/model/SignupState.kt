@@ -7,7 +7,7 @@ data class SignupState(
     val passwordError: String? = null,
     val isLoading: Boolean = false,
     val isSignedIn: Boolean = false,
-    val signIn: Boolean = false,
+    val logIn: Boolean = false,
     val serverError: String? = null,
     val success: String? = null
 )

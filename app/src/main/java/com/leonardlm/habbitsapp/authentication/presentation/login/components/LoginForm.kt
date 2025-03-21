@@ -139,7 +139,7 @@ fun LoginForm(
         }
 
         TextButton(
-            onClick = { onSignUp }
+            onClick = { onSignUp() }
         ) {
             Text(
                 text = buildAnnotatedString {

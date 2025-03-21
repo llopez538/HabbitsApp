@@ -34,20 +34,21 @@ fun NavigationHost(
                     navHostController.navigate(Home)
                 },
                 onSignUp = {
-                    navHostController.popBackStack()
                     navHostController.navigate(SignUp)
                 }
             )
         }
         composable<SignUp> {
             SignupScreen(
-                onSignUp = {
-                    navHostController.popBackStack()
-                    navHostController.navigate(Login)
-                },
                 onSignIn = {
+                    navHostController.navigate(Home) {
+                        popUpTo(navHostController.graph.id) {
+                            inclusive = true
+                        }
+                    }
+                },
+                onLogIn = {
                     navHostController.popBackStack()
-                    navHostController.navigate(Login)
                 }
             )
         }
