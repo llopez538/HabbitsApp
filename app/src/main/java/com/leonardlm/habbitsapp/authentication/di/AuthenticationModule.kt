@@ -6,6 +6,8 @@ import com.leonardlm.habbitsapp.authentication.domain.matcher.EmailMatcher
 import com.leonardlm.habbitsapp.authentication.domain.model.LoginUseCases
 import com.leonardlm.habbitsapp.authentication.domain.model.SignupUseCases
 import com.leonardlm.habbitsapp.authentication.domain.repository.AuthenticationRepository
+import com.leonardlm.habbitsapp.authentication.domain.usecase.GetUserIdUseCase
+import com.leonardlm.habbitsapp.authentication.domain.usecase.LogOutUseCase
 import com.leonardlm.habbitsapp.authentication.domain.usecase.LoginWithEmailUseCase
 import com.leonardlm.habbitsapp.authentication.domain.usecase.SignupWithEmailUseCase
 import com.leonardlm.habbitsapp.authentication.domain.usecase.ValidateEmailUseCase
@@ -56,5 +58,23 @@ object AuthenticationModule {
             validateEmailUseCase = ValidateEmailUseCase(emailMatcher),
             validatePasswordUseCase = ValidatePasswordUseCase()
         )
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetUserIdUseCase(
+        authenticationRepository: AuthenticationRepository
+    ) : GetUserIdUseCase {
+        return GetUserIdUseCase(
+            repository = authenticationRepository
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideLogOutUseCase(
+        repository: AuthenticationRepository
+    ) : LogOutUseCase {
+        return LogOutUseCase(repository)
     }
 }

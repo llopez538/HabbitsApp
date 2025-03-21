@@ -12,6 +12,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
+import com.leonardlm.habbitsapp.navigation.Home
 import com.leonardlm.habbitsapp.navigation.Login
 import com.leonardlm.habbitsapp.navigation.NavigationHost
 import com.leonardlm.habbitsapp.navigation.Onboarding
@@ -44,6 +45,9 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun getStartDestination(hasSeenOnBoarding: Boolean?): Any {
+        if (viewModel.isLoggedIn) {
+            return Home
+        }
         return when (hasSeenOnBoarding) {
             true -> Login
             false -> Onboarding
