@@ -2,9 +2,12 @@ package com.leonardlm.habbitsapp.home.presentation.main
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
@@ -33,6 +36,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.leonardlm.habbitsapp.R
 import com.leonardlm.habbitsapp.home.presentation.main.components.HomeQuote
 import kotlinx.coroutines.launch
@@ -107,18 +111,6 @@ fun HomeScreen() {
                         .fillMaxSize()
                         .padding(innerPadding)
                 ) {
-                    /*Card {
-                        Text("We first make our habits, \n" +
-                                "and then our habits \n" +
-                                "makes us."
-                        )
-                        Image(
-                            painter = painterResource(R.drawable.onboarding1),
-                            contentDescription = "Login background",
-                            contentScale = ContentScale.FillWidth,
-                        )
-                    }*/
-
                     HomeQuote(text =
                         "We first make our habits, \n" +
                                 "and then our habits \n" +
@@ -129,6 +121,20 @@ fun HomeScreen() {
                             .padding(16.dp)
 
                     )
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp)
+                    ) {
+                        Text(
+                            text = "Habits".uppercase(),
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.tertiary,
+                            fontSize = 14.sp
+                        )
+                    }
                 }
             }
         )
