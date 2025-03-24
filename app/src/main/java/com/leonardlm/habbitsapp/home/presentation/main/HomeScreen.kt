@@ -34,6 +34,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.leonardlm.habbitsapp.R
+import com.leonardlm.habbitsapp.home.presentation.main.components.HomeQuote
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -78,12 +79,6 @@ fun HomeScreen() {
                             )
                         }
                     },
-                    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                        containerColor = Color.Transparent,
-                        titleContentColor = MaterialTheme.colorScheme.tertiary,
-                        navigationIconContentColor = MaterialTheme.colorScheme.tertiary
-
-                    )
                 )
             },
             floatingActionButton = {
@@ -111,10 +106,8 @@ fun HomeScreen() {
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(innerPadding)
-                        .padding(20.dp)
                 ) {
-                    Text("Screen")
-                    Card {
+                    /*Card {
                         Text("We first make our habits, \n" +
                                 "and then our habits \n" +
                                 "makes us."
@@ -124,7 +117,18 @@ fun HomeScreen() {
                             contentDescription = "Login background",
                             contentScale = ContentScale.FillWidth,
                         )
-                    }
+                    }*/
+
+                    HomeQuote(text =
+                        "We first make our habits, \n" +
+                                "and then our habits \n" +
+                                "makes us.",
+                        author = "Anonymous",
+                        imageId = R.drawable.onboarding1,
+                        modifier = Modifier
+                            .padding(16.dp)
+
+                    )
                 }
             }
         )
