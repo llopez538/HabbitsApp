@@ -13,3 +13,12 @@ object Home
 
 @Serializable
 object SignUp
+
+@Serializable
+object Profile
+
+@Serializable
+object Settings
+
+@Serializable
+object NavBarHost

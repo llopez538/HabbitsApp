@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.leonardlm.habbitsapp.authentication.presentation.login.LoginScreen
 import com.leonardlm.habbitsapp.authentication.presentation.signup.SignupScreen
 import com.leonardlm.habbitsapp.home.presentation.main.HomeScreen
@@ -14,6 +15,7 @@ fun NavigationHost(
     navHostController: NavHostController,
     startDestination: Any//KClass<*>?
 ) {
+    val navHostBarController = rememberNavController()
 
     NavHost(
         navController = navHostController,
@@ -55,6 +57,8 @@ fun NavigationHost(
         composable<Home> {
             HomeScreen()
         }
+
+//        navigationBarHost(navController = navHostBarController)
 
     }
 }
