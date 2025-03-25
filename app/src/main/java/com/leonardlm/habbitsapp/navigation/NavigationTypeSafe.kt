@@ -22,3 +22,13 @@ object Settings
 
 @Serializable
 object NavBarHost
+
+
+@Serializable
+object DateGraph
+
+@Serializable
+object Date
+
+@Serializable
+object Calendar

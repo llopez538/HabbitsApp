@@ -1,17 +1,23 @@
 package com.leonardlm.habbitsapp.navigation.navigationBar
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import com.leonardlm.habbitsapp.navigation.Date
+import com.leonardlm.habbitsapp.navigation.Home
+import com.leonardlm.habbitsapp.navigation.Profile
+import com.leonardlm.habbitsapp.navigation.Settings
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
+@Stable
 class NavigationBarState(private val navController: NavController) {
     fun isRouteSelected(route: Any): Flow<Boolean>  {
         return navController.currentBackStack.map { backStack ->
             backStack.any {
-                it.destination.route == route
+                it.destination.route == route::class.qualifiedName.orEmpty()
             }
         }
     }

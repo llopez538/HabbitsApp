@@ -9,10 +9,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.leonardlm.habbitsapp.home.presentation.main.HomeScreen
+import com.leonardlm.habbitsapp.navigation.Date
+import com.leonardlm.habbitsapp.navigation.DateGraph
 import com.leonardlm.habbitsapp.navigation.Home
 import com.leonardlm.habbitsapp.navigation.NavBarHost
 import com.leonardlm.habbitsapp.navigation.Profile
 import com.leonardlm.habbitsapp.navigation.Settings
+import com.leonardlm.habbitsapp.navigation.datesGraph
 
 fun NavGraphBuilder.navigationBarHost(
     navController: NavHostController,
@@ -26,15 +29,13 @@ fun NavGraphBuilder.navigationBarHost(
         ) { innerPadding ->
             NavHost(
                 navController = navController,
-                startDestination = Home,
+                startDestination = Profile,
                 modifier = Modifier.padding(innerPadding)
             ) {
-                composable<Home> {
-                    HomeScreen()
-                }
                 composable<Profile> {
                     Text("PROFILE")
                 }
+                datesGraph(navController)
                 composable<Settings> {
                     Text("Settings")
                 }

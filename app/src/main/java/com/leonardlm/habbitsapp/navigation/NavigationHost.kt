@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import com.leonardlm.habbitsapp.authentication.presentation.login.LoginScreen
 import com.leonardlm.habbitsapp.authentication.presentation.signup.SignupScreen
 import com.leonardlm.habbitsapp.home.presentation.main.HomeScreen
+import com.leonardlm.habbitsapp.navigation.navigationBar.navigationBarHost
 import com.leonardlm.habbitsapp.onboarding.presentation.OnboardingScreen
 
 @Composable
@@ -19,7 +20,7 @@ fun NavigationHost(
 
     NavHost(
         navController = navHostController,
-        startDestination = startDestination
+        startDestination = NavBarHost
     ) {
         composable<Onboarding> {
             OnboardingScreen(
@@ -58,7 +59,7 @@ fun NavigationHost(
             HomeScreen()
         }
 
-//        navigationBarHost(navController = navHostBarController)
+        navigationBarHost(navController = navHostBarController)
 
     }
 }
