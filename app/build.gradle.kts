@@ -73,6 +73,9 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
     ksp(libs.hilt.android.compiler)
 
+    // Permissions
+    implementation(libs.accompanist.permissions)
+
     // Room database
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
