@@ -14,7 +14,6 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -28,6 +27,7 @@ internal fun NavigationBarH(
     navController: NavController,
     navigationBarState: NavigationBarState = rememberNavigationBarState(navController)
 ) {
+
     NavigationBar(
         containerColor = Color(0xFFE6E9F2),
         modifier = Modifier
@@ -38,11 +38,10 @@ internal fun NavigationBarH(
     ) {
         NavigationBarItems.items.forEach { item ->
             val isSelected = navigationBarState.isRouteSelected(item.route)
-                .collectAsState(initial = false)
 
             NavigationBarItem(
                 label = { Text(text = item.label) },
-                selected = isSelected.value,
+                selected = isSelected,
                 onClick = { navigationBarState.openRoute(item.route) },
                 icon = {
                     Icon(

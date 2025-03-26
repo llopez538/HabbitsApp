@@ -4,7 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.leonardlm.habbitsapp.navigation.Date
 import com.leonardlm.habbitsapp.navigation.Home
 import com.leonardlm.habbitsapp.navigation.Profile
@@ -14,12 +16,11 @@ import kotlinx.coroutines.flow.map
 
 @Stable
 class NavigationBarState(private val navController: NavController) {
-    fun isRouteSelected(route: Any): Flow<Boolean>  {
-        return navController.currentBackStack.map { backStack ->
-            backStack.any {
-                it.destination.route == route::class.qualifiedName.orEmpty()
-            }
-        }
+    @Composable
+    fun isRouteSelected(route: Any): Boolean  {
+        val navBackStackEntry = navController.currentBackStackEntryAsState()
+        val currentDestination = navBackStackEntry.value?.destination
+        return currentDestination?.hierarchy?.any { it.route == route::class.qualifiedName.orEmpty() } == true
     }
     fun openRoute(route: Any) {
         navController.navigate(route) {
