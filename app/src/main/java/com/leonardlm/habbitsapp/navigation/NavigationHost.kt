@@ -20,7 +20,7 @@ fun NavigationHost(
 
     NavHost(
         navController = navHostController,
-        startDestination = NavBarHost
+        startDestination = startDestination
     ) {
         composable<Onboarding> {
             OnboardingScreen(
