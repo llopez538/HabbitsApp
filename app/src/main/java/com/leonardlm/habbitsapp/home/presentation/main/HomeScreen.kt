@@ -4,11 +4,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Settings
@@ -38,14 +40,15 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.leonardlm.habbitsapp.R
 import com.leonardlm.habbitsapp.home.presentation.main.components.HomeDateSelector
+import com.leonardlm.habbitsapp.home.presentation.main.components.HomeHabit
 import com.leonardlm.habbitsapp.home.presentation.main.components.HomeQuote
 import kotlinx.coroutines.launch
-import java.time.ZonedDateTime
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel = hiltViewModel<HomeViewModel>()
+    viewModel: HomeViewModel = hiltViewModel<HomeViewModel>(),
+    onHabitClick: () -> Unit = {}
 ) {
     val state = viewModel.state
     val snackbarHostState = remember { SnackbarHostState() }
@@ -109,42 +112,67 @@ fun HomeScreen(
                 }
             },
             content = { innerPadding ->
-                Column(
+                LazyColumn (
                     horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(10.dp),
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(innerPadding)
-                ) {
-                    HomeQuote(text =
-                        "We first make our habits, \n" +
-                                "and then our habits \n" +
-                                "makes us.",
-                        author = "Anonymous",
-                        imageId = R.drawable.onboarding1,
-                        modifier = Modifier
-                            .padding(16.dp)
+                        .padding(innerPadding),
+                    contentPadding = PaddingValues(bottom = 20.dp)
 
-                    )
-                    Row(
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 16.dp)
-                    ) {
-                        Text(
-                            text = "Habits".uppercase(),
-                            fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.tertiary,
-                            fontSize = 14.sp
+                ) {
+                    item {
+                        HomeQuote(text =
+                            "We first make our habits, \n" +
+                                    "and then our habits \n" +
+                                    "makes us.",
+                            author = "Anonymous",
+                            imageId = R.drawable.onboarding1,
+                            modifier = Modifier
+                                .padding(horizontal = 16.dp)
+                                .padding(
+                                    bottom = 16.dp,
+                                    top = 8.dp
+                                )
+
                         )
-                        HomeDateSelector(
-                            selectedDate = state.selectedDate,
-                            mainDate = state.currentDate,
-                            onDateClick = {
-                                viewModel.onEvent(HomeEvent.ChangeDate(it))
-                            }
+                    }
+                    item {
+                        Row(
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp)
+                                .padding(bottom = 12.dp)
+                        ) {
+                            Text(
+                                text = "Habits".uppercase(),
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.tertiary,
+                                fontSize = 14.sp
+                            )
+                            HomeDateSelector(
+                                selectedDate = state.selectedDate,
+                                mainDate = state.currentDate,
+                                onDateClick = {
+                                    viewModel.onEvent(HomeEvent.ChangeDate(it))
+                                }
+                            )
+                        }
+                    }
+
+                    items(state.habits) { habit ->
+                        HomeHabit(
+                            habit = habit,
+                            selectedDate = state.selectedDate.toLocalDate(),
+                            onCheckedChange = {
+                                viewModel.onEvent(HomeEvent.CompletedHabit(habit))
+                            },
+                            onHabitClick = { onHabitClick() },
+                            modifier = Modifier.padding(start = 16.dp)
                         )
+
                     }
                 }
             }
