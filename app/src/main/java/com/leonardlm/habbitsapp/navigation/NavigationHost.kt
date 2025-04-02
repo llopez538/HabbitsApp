@@ -7,7 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.leonardlm.habbitsapp.authentication.presentation.login.LoginScreen
 import com.leonardlm.habbitsapp.authentication.presentation.signup.SignupScreen
-import com.leonardlm.habbitsapp.home.presentation.main.HomeScreen
+import com.leonardlm.habbitsapp.main.presentation.home.HomeScreen
 import com.leonardlm.habbitsapp.navigation.navigationBar.navigationBarHost
 import com.leonardlm.habbitsapp.onboarding.presentation.OnboardingScreen
 

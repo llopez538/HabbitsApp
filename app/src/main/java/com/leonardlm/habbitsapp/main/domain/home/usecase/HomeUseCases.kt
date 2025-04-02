@@ -1,4 +1,4 @@
-package com.leonardlm.habbitsapp.home.domain.home.usecase
+package com.leonardlm.habbitsapp.main.domain.home.usecase
 
 data class HomeUseCases(
     val completeHabitUseCase: CompleteHabitUseCase,

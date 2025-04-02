@@ -1,4 +1,4 @@
-package com.leonardlm.habbitsapp.home.presentation.main.components
+package com.leonardlm.habbitsapp.main.presentation.home.components
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image

@@ -1,4 +1,4 @@
-package com.leonardlm.habbitsapp.home.presentation.main
+package com.leonardlm.habbitsapp.main.presentation.home
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect

@@ -1,4 +1,4 @@
-package com.leonardlm.habbitsapp.home.presentation.main
+package com.leonardlm.habbitsapp.main.presentation.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -39,9 +39,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.leonardlm.habbitsapp.R
-import com.leonardlm.habbitsapp.home.presentation.main.components.HomeDateSelector
-import com.leonardlm.habbitsapp.home.presentation.main.components.HomeHabit
-import com.leonardlm.habbitsapp.home.presentation.main.components.HomeQuote
+import com.leonardlm.habbitsapp.main.presentation.home.components.HomeDateSelector
+import com.leonardlm.habbitsapp.main.presentation.home.components.HomeHabit
+import com.leonardlm.habbitsapp.main.presentation.home.components.HomeQuote
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)

@@ -8,10 +8,6 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.leonardlm.habbitsapp.home.presentation.main.HomeScreen
-import com.leonardlm.habbitsapp.navigation.Date
-import com.leonardlm.habbitsapp.navigation.DateGraph
-import com.leonardlm.habbitsapp.navigation.Home
 import com.leonardlm.habbitsapp.navigation.NavBarHost
 import com.leonardlm.habbitsapp.navigation.Profile
 import com.leonardlm.habbitsapp.navigation.Settings

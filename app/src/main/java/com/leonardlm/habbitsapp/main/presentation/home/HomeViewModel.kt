@@ -1,11 +1,11 @@
-package com.leonardlm.habbitsapp.home.presentation.main
+package com.leonardlm.habbitsapp.main.presentation.home
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.leonardlm.habbitsapp.home.domain.home.usecase.HomeUseCases
+import com.leonardlm.habbitsapp.main.domain.home.usecase.HomeUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

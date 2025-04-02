@@ -1,4 +1,4 @@
-package com.leonardlm.habbitsapp.home.models
+package com.leonardlm.habbitsapp.main.models
 
 import java.time.DayOfWeek
 import java.time.LocalDate

@@ -1,8 +1,6 @@
-package com.leonardlm.habbitsapp.home.presentation.main
+package com.leonardlm.habbitsapp.main.presentation.home
 
-import com.leonardlm.habbitsapp.home.models.Habit
-import java.time.LocalDate
-import java.time.LocalTime
+import com.leonardlm.habbitsapp.main.models.Habit
 import java.time.ZonedDateTime
 
 data class HomeState(

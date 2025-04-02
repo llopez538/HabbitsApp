@@ -1,6 +1,6 @@
-package com.leonardlm.habbitsapp.home.presentation.main
+package com.leonardlm.habbitsapp.main.presentation.home
 
-import com.leonardlm.habbitsapp.home.models.Habit
+import com.leonardlm.habbitsapp.main.models.Habit
 import java.time.ZonedDateTime
 
 sealed interface HomeEvent {

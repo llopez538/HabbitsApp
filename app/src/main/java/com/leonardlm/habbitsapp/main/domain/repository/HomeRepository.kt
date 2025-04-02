@@ -1,6 +1,6 @@
-package com.leonardlm.habbitsapp.home.domain.repository
+package com.leonardlm.habbitsapp.main.domain.repository
 
-import com.leonardlm.habbitsapp.home.models.Habit
+import com.leonardlm.habbitsapp.main.models.Habit
 import kotlinx.coroutines.flow.Flow
 import java.time.ZonedDateTime
 

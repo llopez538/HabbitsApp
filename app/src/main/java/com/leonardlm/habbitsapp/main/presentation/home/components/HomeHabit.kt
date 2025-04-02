@@ -1,4 +1,4 @@
-package com.leonardlm.habbitsapp.home.presentation.main.components
+package com.leonardlm.habbitsapp.main.presentation.home.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,7 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.leonardlm.habbitsapp.core.presentation.components.atoms.HabitCheckBox
-import com.leonardlm.habbitsapp.home.models.Habit
+import com.leonardlm.habbitsapp.main.models.Habit
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.ZonedDateTime

@@ -1,10 +1,10 @@
-package com.leonardlm.habbitsapp.home.di
+package com.leonardlm.habbitsapp.main.di
 
-import com.leonardlm.habbitsapp.home.data.repository.HomeRepositoryImpl
-import com.leonardlm.habbitsapp.home.domain.home.usecase.CompleteHabitUseCase
-import com.leonardlm.habbitsapp.home.domain.home.usecase.GetHabitsForDateUseCase
-import com.leonardlm.habbitsapp.home.domain.home.usecase.HomeUseCases
-import com.leonardlm.habbitsapp.home.domain.repository.HomeRepository
+import com.leonardlm.habbitsapp.main.data.repository.HomeRepositoryImpl
+import com.leonardlm.habbitsapp.main.domain.home.usecase.CompleteHabitUseCase
+import com.leonardlm.habbitsapp.main.domain.home.usecase.GetHabitsForDateUseCase
+import com.leonardlm.habbitsapp.main.domain.home.usecase.HomeUseCases
+import com.leonardlm.habbitsapp.main.domain.repository.HomeRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
